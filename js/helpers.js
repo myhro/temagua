@@ -14,7 +14,7 @@ function fetchText(url) {
   });
 }
 
-function hasWater(db, region, time = Date.now()) {
+function hasWater(db, region, time = new Date()) {
   for (let i of db[region]) {
     if (time > i.start && time < i.end) {
       return false;
