@@ -1,0 +1,16 @@
+|Segunda|  Região 01  |23/07/2018|partir |Quarta |25/07/2018|  22h  |      48h  | 
+|Segunda|  Região 04  |23/07/2018|partir | Terça |24/07/2018|  04h  |    06h    | 
+| Terça |  Região 02  |24/07/2018|partir |Quinta |26/07/2018|  22h  |    48h    | 
+| Terça |  Região 04  |24/07/2018|partir |Quarta |25/07/2018|  04h  |    06h    | 
+|Quarta |  Região 03  |25/07/2018|partir | Sexta |27/07/2018|  22h  |    48h    | 
+|Quarta |  Região 04  |25/07/2018|partir |Quinta |26/07/2018|  04h  |    06h    | 
+|Quinta |  Região 01  |26/07/2018|partir |Sábado |28/07/2018|  22h  |    48h    | 
+|Quinta |  Região 04  |26/07/2018|partir | Sexta |27/07/2018|  04h  |    06h    | 
+| Sexta |  Região 02  |27/07/2018|partir |Domingo|29/07/2018|  22h  |    48h    | 
+| Sexta |  Região 04  |27/07/2018|partir |Sábado |28/07/2018|  04h  |    06h    | 
+|Sábado |  Região 03  |28/07/2018|partir |Segunda|30/07/2018|  22h  |    48h    | 
+|Sábado |  Região 04  |28/07/2018|partir |Domingo|29/07/2018|  04h  |    06h    | 
+|Domingo|  Região 01  |29/07/2018|partir | Terça |31/07/2018|  22h  |    48h    | 
+|Domingo|  Região 04  |29/07/2018|partir |Segunda|30/07/2018|  04h  |    06h    | 
+|Segunda|  Região 02  |30/07/2018|partir |Quarta |01/08/2018|  22h  |      48h  | 
+|Segunda|  Região 04  |30/07/2018|partir | Terça |31/07/2018|  04h  |    06h    | 
