@@ -34,6 +34,13 @@ function changeVisibility(name, show) {
   }
 }
 
+function clearSearch() {
+  let input = document.getElementById('neighborhood-input');
+  input.value = '';
+  hideElement('water-available');
+  hideElement('water-unavailable');
+}
+
 function hideElement(name) {
   changeVisibility(name, false);
 }
