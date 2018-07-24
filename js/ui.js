@@ -16,16 +16,28 @@ function checkNeighborhood() {
 }
 
 function checkRegion(region) {
-  let available = document.getElementById('water-available');
-  let unavailable = document.getElementById('water-unavailable');
+  if (hasWater(db, region)) {
+    hideElement('water-unavailable');
+    showElement('water-available');
+  } else {
+    hideElement('water-available');
+    showElement('water-unavailable');
+  }
+}
 
-  let waterCheck = hasWater(db, region);
-  if (waterCheck == true) {
-    available.classList.remove('hide');
-    unavailable.classList.add('hide');
+function changeVisibility(name, show) {
+  let elem = document.getElementById(name);
+  if (show) {
+    elem.classList.remove('hide');
+  } else {
+    elem.classList.add('hide');
   }
-  else {
-    available.classList.add('hide');
-    unavailable.classList.remove('hide');
-  }
+}
+
+function hideElement(name) {
+  changeVisibility(name, false);
+}
+
+function showElement(name) {
+  changeVisibility(name, true);
 }
