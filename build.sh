@@ -4,7 +4,9 @@ set -eu
 
 ASSET_LIST="
 css/materialize.min.css
-js/main.js
+js/db.js
+js/helpers.js
+js/index.js
 js/materialize.min.js
 js/neighborhoods.js
 js/ui.js
@@ -12,7 +14,7 @@ js/ui.js
 
 mkdir -p dist/css dist/data dist/js
 
-cp data/table.txt dist/data/
+cp data/db.json dist/data/
 cp index.html dist/
 touch dist/favicon.ico
 
