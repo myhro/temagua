@@ -1,12 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-  let elems = document.querySelectorAll('select');
-  let options = {classes: '', dropdownOptions: {}};
-  let instances = M.FormSelect.init(elems, options);
+  let elems = document.querySelectorAll('.autocomplete');
+  let list = {};
+  for (let n of Object.keys(neighborhoods)) {
+    list[n] = null;
+  }
+  let options = {data: list};
+  let instances = M.Autocomplete.init(elems, options);
 });
 
-function checkRegion() {
+function checkNeighborhood() {
+  let n = document.getElementById('neighborhood-input').value;
+  if (neighborhoods.hasOwnProperty(n)) {
+    checkRegion(neighborhoods[n]);
+  }
+}
+
+function checkRegion(region) {
   let available = document.getElementById('water-available');
-  let region = document.getElementById('regions').value;
   let unavailable = document.getElementById('water-unavailable');
 
   let waterCheck = hasWater(db, region);

@@ -11,17 +11,11 @@
     <div class="container">
       <h1 class="header center light-blue-text">Tem água hoje?</h1>
       <div class="row center">
-        <h5 class="header col s12 light">Escolha sua região:</h5>
+        <h5 class="header col s12 light">Escolha seu bairro:</h5>
       </div>
       <div class="row center">
         <div class="input-field col s4 offset-s4">
-          <select id="regions" onchange="checkRegion()">
-            <option value="" disabled selected>Região</option>
-            <option value="1">01</option>
-            <option value="2">02</option>
-            <option value="3">03</option>
-            <option value="4">04</option>
-          </select>
+          <input type="text" id="neighborhood-input" class="autocomplete" onchange="checkNeighborhood()">
         </div>
       </div>
       <div class="row center">
@@ -32,6 +26,7 @@
   </div>
   <script src="js/main.js" type="text/javascript"></script>
   <script src="js/materialize.min.js" type="text/javascript"></script>
+  <script src="js/neighborhoods.js" type="text/javascript"></script>
   <script src="js/ui.js" type="text/javascript"></script>
 </body>
 </html>

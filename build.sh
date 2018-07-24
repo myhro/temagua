@@ -6,6 +6,7 @@ ASSET_LIST="
 css/materialize.min.css
 js/main.js
 js/materialize.min.js
+js/neighborhoods.js
 js/ui.js
 "
 
