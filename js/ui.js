@@ -1,4 +1,7 @@
-function checkNeighborhood() {
+import { hasWater } from './helpers';
+import { neighborhoods } from './neighborhoods';
+
+export function checkNeighborhood() {
   let n = document.getElementById('neighborhood-input').value;
   if (neighborhoods.hasOwnProperty(n)) {
     checkRegion(neighborhoods[n]);
@@ -24,7 +27,7 @@ function changeVisibility(name, show) {
   }
 }
 
-function clearSearch() {
+export function clearSearch() {
   let input = document.getElementById('neighborhood-input');
   input.value = '';
   hideElement('water-available');

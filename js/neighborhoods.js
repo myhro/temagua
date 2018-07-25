@@ -1,4 +1,4 @@
-let neighborhoods = {
+export let neighborhoods = {
   'Alcides Rabelo': 1,
   'Alto da Boa Vista': 1,
   'Augusta Mota': 1,
