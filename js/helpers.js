@@ -1,4 +1,4 @@
-function addElem(obj, key, value) {
+export function addElem(obj, key, value) {
   if (obj.hasOwnProperty(key)) {
     obj[key].push(value);
   } else {
@@ -6,7 +6,7 @@ function addElem(obj, key, value) {
   }
 }
 
-function fetchText(url) {
+export function fetchText(url) {
   return fetch(url).then(response => {
     return response.text();
   }).then(text => {
@@ -23,7 +23,7 @@ function hasWater(db, region, time = new Date()) {
   return true;
 }
 
-function parseDate(date, time) {
+export function parseDate(date, time) {
   let [day, month, year] = date.split('/');
   month -= 1
   let hour = time.split('h')[0];
