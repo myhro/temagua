@@ -1,5 +1,5 @@
 build:
-	./build.sh
+	parcel build index.html
 
 clean:
 	rm -rf dist/
@@ -11,4 +11,7 @@ fetch:
 	./fetch.sh > data/table.txt
 
 up:
-	python -m http.server
+	(cd dist/ && python -m http.server)
+
+watch:
+	parcel watch *.html
