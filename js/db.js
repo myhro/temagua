@@ -9,9 +9,11 @@ function addEntry(db, region, start_date, start_hour, end_date, end_hour) {
   addElem(db, region, interval);
 }
 
-export function fillDb(url) {
+export function fillDb(url, db = null) {
   return fetchText(url).then(table => {
-    let db = {};
+    if (db == null) {
+      let db = {};
+    }
     let lines = table.trim().split('\n');
     for (let l of lines) {
       let columns = l.split('|');
