@@ -62,3 +62,19 @@
 |Domingo|  Região 04  |19/08/2018|partir |Segunda|20/08/2018|  04h  |    06h    | 
 |Segunda|  Região 02  |20/08/2018|partir |Quarta |22/08/2018|  22h  |      48h  | 
 |Segunda|  Região 04  |20/08/2018|partir | Terça |21/08/2018|  04h  |    06h    | 
+|Segunda|  Região 02  |20/08/2018|partir |Quarta |22/08/2018|  22h  |    48h    | 
+|Segunda|  Região 04  |20/08/2018|partir | Terça |21/08/2018|  04h  |    06h    | 
+| Terça |  Região 03  |21/08/2018|partir |Quinta |23/08/2018|  22h  |    48h    | 
+| Terça |  Região 04  |21/08/2018|partir |Quarta |22/08/2018|  04h  |    06h    | 
+|Quarta |  Região 01  |22/08/2018|partir | Sexta |24/08/2018|  22h  |    48h    | 
+|Quarta |  Região 04  |22/08/2018|partir |Quinta |23/08/2018|  04h  |    06h    | 
+|Quinta |  Região 02  |23/08/2018|partir |Sábado |25/08/2018|  22h  |    48h    | 
+|Quinta |  Região 04  |23/08/2018|partir | Sexta |24/08/2018|  04h  |    06h    | 
+| Sexta |  Região 03  |24/08/2018|partir |Domingo|26/08/2018|  22h  |    48h    | 
+| Sexta |  Região 04  |24/08/2018|partir |Sábado |25/08/2018|  04h  |    06h    | 
+|Sábado |  Região 01  |25/08/2018|partir |Segunda|27/08/2018|  22h  |    48h    | 
+|Sábado |  Região 04  |25/08/2018|partir |Domingo|26/08/2018|  04h  |    06h    | 
+|Domingo|  Região 02  |26/08/2018|partir | Terça |28/08/2018|  22h  |    48h    | 
+|Domingo|  Região 04  |26/08/2018|partir |Segunda|27/08/2018|  04h  |    06h    | 
+|Segunda|  Região 03  |27/08/2018|partir |Quarta |29/08/2018|  22h  |    48h    | 
+|Segunda|  Região 04  |27/08/2018|partir | Terça |28/08/2018|  04h  |    06h    | 
