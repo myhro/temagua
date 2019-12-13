@@ -174,7 +174,7 @@ func (iset *InterruptionSet) parseRegions(i int) []int {
 	for _, p := range pos {
 		r, err := strconv.Atoi(iset.lines[i][p])
 		if err != nil {
-			log.Print("Couldn't parse region: ", r)
+			log.Print("Couldn't parse region: ", err)
 			continue
 		}
 		regions = append(regions, r)
