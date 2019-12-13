@@ -23,7 +23,7 @@ type InterruptionSet struct {
 }
 
 var sources = []string{
-	"2019-12-09-to-2019-12-15.txt",
+	"data/2019-12-09-to-2019-12-15.txt",
 }
 
 func (i Interruption) String() string {
@@ -50,7 +50,7 @@ func (iset *InterruptionSet) fixTimeZones() {
 }
 
 func (iset *InterruptionSet) load() {
-	buf, err := ioutil.ReadFile("data/" + iset.source)
+	buf, err := ioutil.ReadFile(iset.source)
 	if err != nil {
 		log.Print(err)
 	}
@@ -85,7 +85,8 @@ func (iset *InterruptionSet) parseAllDays(i int) []Interruption {
 	dates := []time.Time{}
 	list := []Interruption{}
 
-	timestamps := strings.Split(iset.source, ".")
+	timestamps := strings.Split(iset.source, "/")
+	timestamps = strings.Split(timestamps[1], ".")
 	timestamps = strings.Split(timestamps[0], "-to-")
 	for _, t := range timestamps {
 		d, err := time.Parse("2006-01-02", t)
