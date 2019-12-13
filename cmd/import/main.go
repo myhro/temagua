@@ -24,6 +24,7 @@ type InterruptionSet struct {
 
 var sources = []string{
 	"data/2019-12-09-to-2019-12-15.txt",
+	"data/2019-12-16-to-2019-12-22.txt",
 }
 
 func (i Interruption) String() string {
@@ -35,7 +36,12 @@ func (iset *InterruptionSet) clean() {
 	for _, line := range strings.Split(iset.content, "\n") {
 		cols := []string{}
 		for _, c := range strings.Fields(line) {
+			// Ignore useless separators
+			if c == "e" {
+				continue
+			}
 			c = strings.Trim(c, ",")
+
 			cols = append(cols, c)
 		}
 		iset.lines = append(iset.lines, cols)
@@ -151,9 +157,14 @@ func (iset *InterruptionSet) parseDates(i int) []Interruption {
 }
 
 func (iset *InterruptionSet) parseDuration(i int) time.Duration {
-	pos := len(iset.lines[i]) - 2
+	last := len(iset.lines[i]) - 1
+	dur := iset.lines[i][last-1]
+	if iset.lines[i][last] != "horas" {
+		dur = iset.lines[i][last]
+		dur = strings.Trim(dur, "h")
+	}
 
-	hours, err := strconv.Atoi(iset.lines[i][pos])
+	hours, err := strconv.Atoi(dur)
 	if err != nil {
 		log.Print("Couldn't parse duration: ", err)
 	}

@@ -30,9 +30,51 @@ func TestParseDateFormatV1(t *testing.T) {
 	assert.Equal(t, 16, last.end.Day())
 }
 
+func TestParseDateFormatV2(t *testing.T) {
+	intset := InterruptionSet{
+		source: "testdata/2019-12-16-to-2019-12-22.txt",
+	}
+	intset.load()
+
+	first := intset.list[0]
+	assert.Equal(t, 2019, first.start.Year())
+	assert.Equal(t, time.December, first.start.Month())
+	assert.Equal(t, 16, first.start.Day())
+	assert.Equal(t, 2019, first.end.Year())
+	assert.Equal(t, time.December, first.end.Month())
+	assert.Equal(t, 17, first.end.Day())
+
+	last := intset.list[len(intset.list)-1]
+	assert.Equal(t, 2019, last.start.Year())
+	assert.Equal(t, time.December, last.start.Month())
+	assert.Equal(t, 22, last.start.Day())
+	assert.Equal(t, 2019, last.end.Year())
+	assert.Equal(t, time.December, last.end.Month())
+	assert.Equal(t, 23, last.end.Day())
+}
+
 func TestParseHourFormatV1(t *testing.T) {
 	intset := InterruptionSet{
 		source: "testdata/2019-12-09-to-2019-12-15.txt",
+	}
+	intset.load()
+
+	first := intset.list[0]
+	assert.Equal(t, 0, first.start.Hour())
+	assert.Equal(t, 0, first.start.Minute())
+	assert.Equal(t, 0, first.end.Hour())
+	assert.Equal(t, 0, first.end.Minute())
+
+	last := intset.list[len(intset.list)-1]
+	assert.Equal(t, 22, last.start.Hour())
+	assert.Equal(t, 0, last.start.Minute())
+	assert.Equal(t, 4, last.end.Hour())
+	assert.Equal(t, 0, last.end.Minute())
+}
+
+func TestParseHourFormatV2(t *testing.T) {
+	intset := InterruptionSet{
+		source: "testdata/2019-12-16-to-2019-12-22.txt",
 	}
 	intset.load()
 
@@ -57,6 +99,19 @@ func TestParseRegionFormatV1(t *testing.T) {
 
 	assert.Equal(t, 3, intset.list[0].region)
 	assert.Equal(t, 4, intset.list[1].region)
+	for i := 0; i < 7; i++ {
+		assert.Equal(t, 5, intset.list[i+2].region)
+	}
+}
+
+func TestParseRegionFormatV2(t *testing.T) {
+	intset := InterruptionSet{
+		source: "testdata/2019-12-16-to-2019-12-22.txt",
+	}
+	intset.load()
+
+	assert.Equal(t, 1, intset.list[0].region)
+	assert.Equal(t, 2, intset.list[1].region)
 	for i := 0; i < 7; i++ {
 		assert.Equal(t, 5, intset.list[i+2].region)
 	}
