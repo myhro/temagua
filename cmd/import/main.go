@@ -34,11 +34,7 @@ func (iset *InterruptionSet) clean() {
 	iset.content = strings.Trim(iset.content, "\n")
 	for _, line := range strings.Split(iset.content, "\n") {
 		cols := []string{}
-		for _, c := range strings.Split(line, " ") {
-			if len(c) == 0 {
-				continue
-			}
-			c = strings.TrimSpace(c)
+		for _, c := range strings.Fields(line) {
 			c = strings.Trim(c, ",")
 			cols = append(cols, c)
 		}
