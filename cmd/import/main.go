@@ -61,7 +61,6 @@ func (iset *InterruptionSet) load() {
 
 func (iset *InterruptionSet) parse() {
 	for i := range iset.lines {
-		fmt.Println(iset.lines[i])
 		dates := iset.parseDates(i)
 		regions := iset.parseRegions(i)
 		for _, r := range regions {
@@ -76,9 +75,6 @@ func (iset *InterruptionSet) parse() {
 		}
 	}
 	iset.fixTimeZones()
-	for _, entry := range iset.list {
-		fmt.Println(entry)
-	}
 }
 
 func (iset *InterruptionSet) parseAllDays(i int) []Interruption {
@@ -207,5 +203,13 @@ func main() {
 			source: s,
 		}
 		intset.load()
+
+		for i := range intset.lines {
+			fmt.Println(intset.lines[i])
+		}
+
+		for _, entry := range intset.list {
+			fmt.Println(entry)
+		}
 	}
 }
