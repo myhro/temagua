@@ -10,8 +10,8 @@ deploy:
 fetch:
 	./fetch.sh >> data/table.txt
 
-up:
-	(cd dist/ && python -m http.server)
+serve:
+	npm run serve
 
 watch:
-	parcel watch *.html
+	npm run watch
