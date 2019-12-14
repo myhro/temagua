@@ -34,8 +34,8 @@ func getInterruption(c *gin.Context) {
 	SELECT start, end
 		FROM interruption
 		WHERE region = ?
-		AND datetime('now') >= start
-		AND datetime('now') <= end;
+		AND datetime('now') >= datetime(start, 'utc')
+		AND datetime('now') <= datetime(end, 'utc');
 `
 	rows, err := db.Query(query, region)
 	if err != nil {
