@@ -1,4 +1,4 @@
-import { hasWater } from './backend';
+import { hasWater, waterStatus } from './backend';
 import { neighborhoods } from './neighborhoods';
 
 export async function checkNeighborhood() {
@@ -11,13 +11,23 @@ export async function checkNeighborhood() {
 }
 
 async function checkRegion(region) {
-  let available = await hasWater(region);
-  if (available) {
-    hideElement('water-unavailable');
-    showElement('water-available');
-  } else {
-    hideElement('water-available');
-    showElement('water-unavailable');
+  let status = await hasWater(region);
+  switch (status) {
+    case waterStatus.AVAILABLE:
+      hideAll();
+      showElement('water-available');
+      break;
+    case waterStatus.UNAVAILABLE:
+      hideAll();
+      showElement('water-unavailable');
+      break;
+    case waterStatus.OUTDATED:
+      hideAll();
+      showElement('water-outdated');
+      break;
+    default:
+      hideAll();
+      showElement('water-error');
   }
 }
 
@@ -33,7 +43,14 @@ function changeVisibility(name, show) {
 export function clearSearch() {
   let input = document.getElementById('neighborhood-input');
   input.value = '';
+  hideAll();
+}
+
+function hideAll() {
   hideElement('water-available');
+  hideElement('water-error');
+  hideElement('water-loading');
+  hideElement('water-outdated');
   hideElement('water-unavailable');
 }
 
