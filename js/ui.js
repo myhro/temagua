@@ -1,4 +1,4 @@
-import { hasWater } from './helpers';
+import { hasWater } from './backend';
 import { neighborhoods } from './neighborhoods';
 
 export function checkNeighborhood() {

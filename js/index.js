@@ -1,4 +1,3 @@
-import { loadDb } from './db';
 import { neighborhoods } from './neighborhoods';
 import { checkNeighborhood, clearSearch } from './ui';
 
@@ -25,5 +24,3 @@ document.addEventListener('DOMContentLoaded', function() {
   initMaterialize();
   setupEvents();
 });
-
-window.db = loadDb();
