@@ -22,6 +22,14 @@ func getInterruption(c *gin.Context) {
 		return
 	}
 
+	if dbIsOutOfDate() {
+		c.JSON(http.StatusConflict, gin.H{
+			"error":    "database is out of date",
+			"outdated": true,
+		})
+		return
+	}
+
 	query := `
 	SELECT start, end
 		FROM interruption

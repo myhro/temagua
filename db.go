@@ -31,6 +31,20 @@ CREATE TABLE IF NOT EXISTS interruption (
 
 }
 
+func dbIsOutOfDate() bool {
+	rows, err := db.Query("SELECT 1 FROM (SELECT * FROM interruption ORDER BY end DESC LIMIT 1) WHERE datetime('now') > end;")
+	if err != nil {
+		log.Print(err)
+		return false
+	}
+	defer rows.Close()
+
+	if rows.Next() {
+		return true
+	}
+	return false
+}
+
 func importDB() {
 	sources := []string{
 		"data/2019-12-09-to-2019-12-15.txt",
