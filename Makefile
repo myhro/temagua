@@ -1,3 +1,6 @@
+api:
+	go run .
+
 build:
 	parcel build index.html
 
