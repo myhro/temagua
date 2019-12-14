@@ -2,6 +2,9 @@ import { loadDb } from './db';
 import { neighborhoods } from './neighborhoods';
 import { checkNeighborhood, clearSearch } from './ui';
 
+import '../node_modules/materialize-css/dist/css/materialize.min.css';
+import '../node_modules/materialize-css/dist/js/materialize.min.js';
+
 function initMaterialize() {
   let elems = document.querySelectorAll('.autocomplete');
   let list = {};

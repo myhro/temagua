@@ -6,5 +6,8 @@
   "scripts": {
     "serve": "serve dist/",
     "watch": "parcel watch *.html"
+  },
+  "dependencies": {
+    "materialize-css": "^1.0.0"
   }
 }
