@@ -1,4 +1,4 @@
-package main
+package interruption
 
 import (
 	"fmt"
@@ -10,30 +10,33 @@ import (
 )
 
 type Interruption struct {
-	region int
-	start  time.Time
-	end    time.Time
+	Region int
+	Start  time.Time
+	End    time.Time
 }
 
-type InterruptionSet struct {
-	content string
-	list    []Interruption
-	lines   [][]string
-	source  string
+type Set struct {
+	Content string
+	List    []Interruption
+	Lines   [][]string
+	Source  string
 }
 
-var sources = []string{
-	"data/2019-12-09-to-2019-12-15.txt",
-	"data/2019-12-16-to-2019-12-22.txt",
+func NewSet(s string) *Set {
+	set := Set{
+		Source: s,
+	}
+	set.load()
+	return &set
 }
 
 func (i Interruption) String() string {
-	return fmt.Sprintf("Region: %v, Start: %v, End: %v", i.region, i.start, i.end)
+	return fmt.Sprintf("Region: %v, Start: %v, End: %v", i.Region, i.Start, i.End)
 }
 
-func (iset *InterruptionSet) clean() {
-	iset.content = strings.Trim(iset.content, "\n")
-	for _, line := range strings.Split(iset.content, "\n") {
+func (iset *Set) clean() {
+	iset.Content = strings.Trim(iset.Content, "\n")
+	for _, line := range strings.Split(iset.Content, "\n") {
 		cols := []string{}
 		for _, c := range strings.Fields(line) {
 			// Ignore useless separators
@@ -44,50 +47,50 @@ func (iset *InterruptionSet) clean() {
 
 			cols = append(cols, c)
 		}
-		iset.lines = append(iset.lines, cols)
+		iset.Lines = append(iset.Lines, cols)
 	}
 }
 
-func (iset *InterruptionSet) fixTimeZones() {
-	for i := range iset.list {
-		iset.list[i].start = fixTimeZone(iset.list[i].start)
-		iset.list[i].end = fixTimeZone(iset.list[i].end)
+func (iset *Set) fixTimeZones() {
+	for i := range iset.List {
+		iset.List[i].Start = fixTimeZone(iset.List[i].Start)
+		iset.List[i].End = fixTimeZone(iset.List[i].End)
 	}
 }
 
-func (iset *InterruptionSet) load() {
-	buf, err := ioutil.ReadFile(iset.source)
+func (iset *Set) load() {
+	buf, err := ioutil.ReadFile(iset.Source)
 	if err != nil {
 		log.Print(err)
 	}
-	iset.content = string(buf)
+	iset.Content = string(buf)
 	iset.clean()
 	iset.parse()
 }
 
-func (iset *InterruptionSet) parse() {
-	for i := range iset.lines {
+func (iset *Set) parse() {
+	for i := range iset.Lines {
 		dates := iset.parseDates(i)
 		regions := iset.parseRegions(i)
 		for _, r := range regions {
 			for _, d := range dates {
 				tmp := Interruption{
-					region: r,
-					start:  d.start,
-					end:    d.end,
+					Region: r,
+					Start:  d.Start,
+					End:    d.End,
 				}
-				iset.list = append(iset.list, tmp)
+				iset.List = append(iset.List, tmp)
 			}
 		}
 	}
 	iset.fixTimeZones()
 }
 
-func (iset *InterruptionSet) parseAllDays(i int) []Interruption {
+func (iset *Set) parseAllDays(i int) []Interruption {
 	dates := []time.Time{}
 	list := []Interruption{}
 
-	timestamps := strings.Split(iset.source, "/")
+	timestamps := strings.Split(iset.Source, "/")
 	timestamps = strings.Split(timestamps[1], ".")
 	timestamps = strings.Split(timestamps[0], "-to-")
 	for _, t := range timestamps {
@@ -99,7 +102,7 @@ func (iset *InterruptionSet) parseAllDays(i int) []Interruption {
 		dates = append(dates, d)
 	}
 
-	hours, err := strconv.Atoi(strings.Trim(iset.lines[i][4], "h"))
+	hours, err := strconv.Atoi(strings.Trim(iset.Lines[i][4], "h"))
 	if err != nil {
 		log.Print("Couldn't parse date: ", err)
 		return list
@@ -118,9 +121,9 @@ func (iset *InterruptionSet) parseAllDays(i int) []Interruption {
 
 	for start.After(dates[1]) != true {
 		tmp := Interruption{
-			region: reg,
-			start:  start,
-			end:    end,
+			Region: reg,
+			Start:  start,
+			End:    end,
 		}
 		list = append(list, tmp)
 		start = start.Add(24 * time.Hour)
@@ -130,14 +133,14 @@ func (iset *InterruptionSet) parseAllDays(i int) []Interruption {
 	return list
 }
 
-func (iset *InterruptionSet) parseDates(i int) []Interruption {
+func (iset *Set) parseDates(i int) []Interruption {
 	list := []Interruption{}
 
-	if iset.lines[i][0] == "TODOS" {
+	if iset.Lines[i][0] == "TODOS" {
 		return iset.parseAllDays(i)
 	}
 
-	start, err := time.Parse("02/01/2006", iset.lines[i][3])
+	start, err := time.Parse("02/01/2006", iset.Lines[i][3])
 	if err != nil {
 		log.Print("Couldn't parse date: ", err)
 		return list
@@ -147,8 +150,8 @@ func (iset *InterruptionSet) parseDates(i int) []Interruption {
 	end := start.Add(duration)
 
 	interr := Interruption{
-		start: start,
-		end:   end,
+		Start: start,
+		End:   end,
 	}
 
 	list = append(list, interr)
@@ -156,11 +159,11 @@ func (iset *InterruptionSet) parseDates(i int) []Interruption {
 	return list
 }
 
-func (iset *InterruptionSet) parseDuration(i int) time.Duration {
-	last := len(iset.lines[i]) - 1
-	dur := iset.lines[i][last-1]
-	if iset.lines[i][last] != "horas" {
-		dur = iset.lines[i][last]
+func (iset *Set) parseDuration(i int) time.Duration {
+	last := len(iset.Lines[i]) - 1
+	dur := iset.Lines[i][last-1]
+	if iset.Lines[i][last] != "horas" {
+		dur = iset.Lines[i][last]
 		dur = strings.Trim(dur, "h")
 	}
 
@@ -172,18 +175,18 @@ func (iset *InterruptionSet) parseDuration(i int) time.Duration {
 	return time.Duration(hours) * time.Hour
 }
 
-func (iset *InterruptionSet) parseRegions(i int) []int {
+func (iset *Set) parseRegions(i int) []int {
 	pos := []int{
 		1,
 	}
 	regions := []int{}
 
-	if iset.lines[i][0] != "TODOS" {
+	if iset.Lines[i][0] != "TODOS" {
 		pos = append(pos, 2)
 	}
 
 	for _, p := range pos {
-		r, err := strconv.Atoi(iset.lines[i][p])
+		r, err := strconv.Atoi(iset.Lines[i][p])
 		if err != nil {
 			log.Print("Couldn't parse region: ", err)
 			continue
@@ -206,21 +209,4 @@ func fixTimeZone(t time.Time) time.Time {
 	t = t.Add(time.Duration(-offset) * time.Second)
 
 	return t
-}
-
-func main() {
-	for _, s := range sources {
-		intset := InterruptionSet{
-			source: s,
-		}
-		intset.load()
-
-		for i := range intset.lines {
-			fmt.Println(intset.lines[i])
-		}
-
-		for _, entry := range intset.list {
-			fmt.Println(entry)
-		}
-	}
 }
