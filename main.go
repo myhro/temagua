@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"log"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/mattn/go-sqlite3"
 )
@@ -18,7 +19,11 @@ func main() {
 	createDB()
 	importDB()
 
-	r := gin.Default()
-	r.GET("/interruption", getInterruption)
-	r.Run()
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"}
+
+	router := gin.Default()
+	router.Use(cors.New(config))
+	router.GET("/interruption", getInterruption)
+	router.Run()
 }
