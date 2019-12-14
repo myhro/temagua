@@ -1,4 +1,7 @@
 {
+  "browserslist": [
+    "Chrome >= 55"
+  ],
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
     "serve": "^11.2.0"

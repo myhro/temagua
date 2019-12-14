@@ -8,8 +8,9 @@ export function checkNeighborhood() {
   }
 }
 
-function checkRegion(region) {
-  if (hasWater(db, region)) {
+async function checkRegion(region) {
+  let available = await hasWater(region);
+  if (available) {
     hideElement('water-unavailable');
     showElement('water-available');
   } else {

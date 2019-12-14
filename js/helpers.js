@@ -14,18 +14,15 @@ export function fetchText(url) {
   });
 }
 
-export function hasWater(db, region, time = new Date()) {
-  for (let i of db[region]) {
-    if (time > i.start && time < i.end) {
-      return false;
-    }
-  }
-  return true;
+export async function hasWater(region) {
+  let res = await fetch(process.env.API_URL + '/interruption?region=' + region);
+  let json = await res.json();
+  return !json['interrupted'];
 }
 
 export function parseDate(date, time) {
   let [day, month, year] = date.split('/');
-  month -= 1
+  month -= 1;
   let hour = time.split('h')[0];
   let offset = 3;
   hour = Number(hour) + offset;
