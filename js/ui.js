@@ -1,10 +1,12 @@
 import { hasWater } from './backend';
 import { neighborhoods } from './neighborhoods';
 
-export function checkNeighborhood() {
+export async function checkNeighborhood() {
   let n = document.getElementById('neighborhood-input').value;
   if (neighborhoods.hasOwnProperty(n)) {
-    checkRegion(neighborhoods[n]);
+    showElement('water-loading');
+    await checkRegion(neighborhoods[n]);
+    hideElement('water-loading');
   }
 }
 
