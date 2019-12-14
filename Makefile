@@ -8,11 +8,11 @@ build:
 clean:
 	rm -rf .cache/ dist/
 
-deploy:
+deploy: clean build
 	s3cmd sync --delete-removed --encoding=UTF-8 --add-encoding-exts=txt dist/ s3://temagua.myhro.info/
 
 serve:
 	npm run serve
 
-watch:
+watch: clean
 	npm run watch
