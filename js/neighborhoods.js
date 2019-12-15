@@ -1,4 +1,6 @@
 export const neighborhoods = {
+  'Cidade Nova': 0,
+  'Vila Guilhermina': 0,
   'Augusta Mota': 1,
   'Canelas I e II': 1,
   'Clarice Ataíde': 1,
