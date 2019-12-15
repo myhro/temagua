@@ -47,6 +47,9 @@ func dbIsOutOfDate() bool {
 
 func importDB() {
 	sources := []string{
+		"data/2019-11-18-to-2019-11-24.txt",
+		"data/2019-11-25-to-2019-12-01.txt",
+		"data/2019-12-02-to-2019-12-08.txt",
 		"data/2019-12-09-to-2019-12-15.txt",
 		"data/2019-12-16-to-2019-12-22.txt",
 	}
