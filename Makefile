@@ -3,7 +3,7 @@ COVERFILE := cover.out
 api:
 	go run .
 
-build:
+build: clean
 	export NODE_ENV=production
 	npm run build
 
@@ -13,7 +13,7 @@ clean:
 coverage:
 	go tool cover -html $(COVERFILE)
 
-deploy: clean build
+deploy: build
 	s3cmd sync --delete-removed --encoding=UTF-8 --add-encoding-exts=txt dist/ s3://temagua.myhro.info/
 
 serve:
