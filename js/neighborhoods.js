@@ -152,3 +152,7 @@ export const neighborhoods = {
   'Vila Telma e Vila Tiradentes': 4,
   'Distrito Industrial': 5,
 }
+
+export function sortNeighborhoods(a, b, inputString) {
+  return a.localeCompare(b);
+}

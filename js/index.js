@@ -1,4 +1,4 @@
-import { neighborhoods } from './neighborhoods';
+import { neighborhoods, sortNeighborhoods } from './neighborhoods';
 import { checkNeighborhood, clearSearch } from './ui';
 
 import '../node_modules/materialize-css/dist/css/materialize.min.css';
@@ -10,7 +10,7 @@ function initMaterialize() {
   for (let n of Object.keys(neighborhoods)) {
     list[n] = null;
   }
-  let options = {data: list};
+  let options = {data: list, sortFunction: sortNeighborhoods};
   let instances = M.Autocomplete.init(elems, options);
 }
 
