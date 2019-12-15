@@ -25,5 +25,7 @@ func main() {
 	router := gin.Default()
 	router.Use(cors.New(config))
 	router.GET("/interruption", getInterruption)
+
+	log.Print("Running...")
 	router.Run()
 }
