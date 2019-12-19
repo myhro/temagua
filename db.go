@@ -3,6 +3,8 @@ package main
 import (
 	"database/sql"
 	"log"
+	"os"
+	"path/filepath"
 
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/myhro/temagua/interruption"
@@ -46,12 +48,22 @@ func dbIsOutOfDate() bool {
 }
 
 func importDB() {
-	sources := []string{
-		"data/2019-11-18-to-2019-11-24.txt",
-		"data/2019-11-25-to-2019-12-01.txt",
-		"data/2019-12-02-to-2019-12-08.txt",
-		"data/2019-12-09-to-2019-12-15.txt",
-		"data/2019-12-16-to-2019-12-22.txt",
+	folder := "data/"
+	sources := []string{}
+	err := filepath.Walk(folder, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			log.Print(err)
+			return err
+		}
+		if path == folder {
+			return nil
+		}
+		sources = append(sources, path)
+		return nil
+	})
+	if err != nil {
+		log.Print(err)
+		return
 	}
 
 	stmt, err := db.Prepare("INSERT INTO interruption (region, start, end) VALUES (?, ?, ?);")
