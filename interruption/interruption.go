@@ -102,21 +102,21 @@ func (iset *Set) parseAllDays(i int) []Interruption {
 		dates = append(dates, d)
 	}
 
-	hours, err := strconv.Atoi(strings.Trim(iset.Lines[i][4], "h"))
-	if err != nil {
-		log.Print("Couldn't parse date: ", err)
-		return list
-	}
-
 	var reg int
 	regions := iset.parseRegions(i)
 	if len(regions) > 0 {
 		reg = regions[0]
 	}
 
+	hour, err := iset.parseStartingHour(i)
+	if err != nil {
+		log.Print("Couldn't parse starting hour: ", err)
+		return list
+	}
+
 	start := dates[0]
-	start = start.Add(time.Duration(hours) * time.Hour)
-	dates[1] = dates[1].Add(time.Duration(hours) * time.Hour)
+	start = start.Add(time.Duration(hour) * time.Hour)
+	dates[1] = dates[1].Add(time.Duration(hour) * time.Hour)
 	end := start.Add(iset.parseDuration(i))
 
 	for start.After(dates[1]) != true {
@@ -195,6 +195,15 @@ func (iset *Set) parseRegions(i int) []int {
 	}
 
 	return regions
+}
+
+func (iset *Set) parseStartingHour(i int) (int, error) {
+	hour := iset.Lines[i][4]
+	if !strings.HasSuffix(hour, "h") {
+		hour = iset.Lines[i][3]
+	}
+	hour = strings.Trim(hour, "h")
+	return strconv.Atoi(hour)
 }
 
 func fixTimeZone(t time.Time) time.Time {
