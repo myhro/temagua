@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "@cloudflare/wrangler": "^1.6.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "wrangler": "wrangler"
+  }
+}
