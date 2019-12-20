@@ -51,16 +51,18 @@ async function getInterruption(url) {
   let region = parseInt(params.get('region'));
 
   if (Number.isNaN(region) || region === null) {
-    return response({error: 'invalid region'});
+    return response({error: 'not a valid region'}, 400);
   }
 
-  let res = {region: region};
   let outdated = await checkOutdated();
-
+  let res = {};
   if (outdated) {
+    res['error'] = 'database is out of date';
     res['outdated'] = true;
-    return response(res);
+    return response(res, 409);
   }
+
+  res['region'] = region;
 
   let status = await regionStatus(region);
   if (status === null) {
@@ -82,11 +84,17 @@ async function regionStatus(region) {
   return res;
 }
 
-function response(content) {
+function response(content, status) {
   let headers = new Headers({
    'Access-Control-Allow-Origin': '*',
    'Content-Type': 'application/json',
   });
-  let res = new Response(JSON.stringify(content), {headers: headers});
+
+  if (status === undefined) {
+    status = 200;
+  }
+
+  let res = new Response(JSON.stringify(content), {headers: headers, status: status});
+
   return res;
 }
