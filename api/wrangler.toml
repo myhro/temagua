@@ -10,6 +10,6 @@ workers_dev = true
 kv-namespaces = [
   { binding = "DB", id = "088c359c269a432cad3d815c326fc977" }
 ]
-route = "temagua-api-workers.myhro.info/*"
+route = "temagua-api.myhro.info/*"
 workers_dev = false
 zone_id = "dbe71f84a9e980bcfd36c2f2fda5e825"

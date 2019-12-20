@@ -8,6 +8,6 @@ bucket = "dist"
 entry-point = "workers-site"
 
 [env.production]
-route = "temagua-workers.myhro.info/*"
+route = "temagua.myhro.info/*"
 workers_dev = false
 zone_id = "dbe71f84a9e980bcfd36c2f2fda5e825"
