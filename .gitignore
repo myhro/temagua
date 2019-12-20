@@ -2,4 +2,5 @@
 dist/
 node_modules/
 cover.out
+dump.json
 sqlite.db

@@ -20,6 +20,9 @@ coverage:
 deploy-web: build-web
 	s3cmd sync --delete-removed --encoding=UTF-8 --add-encoding-exts=txt dist/ s3://temagua.myhro.info/
 
+dump:
+	go run ./cmd/export/ > api/dump.json
+
 serve:
 	npm run serve
 
