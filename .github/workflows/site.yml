@@ -30,7 +30,7 @@ jobs:
           make deploy
   deploy-prod:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    needs: build
+    needs: deploy
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1
