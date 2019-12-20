@@ -12,7 +12,7 @@ clean:
 deploy: build
 	npm run wrangler -- publish
 
-deploy-prod: deploy build-prod
+deploy-prod: build-prod
 	npm run wrangler -- publish --env production
 
 deps:

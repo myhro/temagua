@@ -12,7 +12,7 @@ db-prod: db
 deploy:
 	npm run wrangler -- publish
 
-deploy-prod: deploy
+deploy-prod:
 	npm run wrangler -- publish --env production
 
 preview:
