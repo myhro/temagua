@@ -1,6 +1,7 @@
 .cache/
 dist/
 node_modules/
+site/workers-site/worker/
 cover.out
 dump.json
 sqlite.db
