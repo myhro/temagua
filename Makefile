@@ -14,7 +14,7 @@ coverage:
 	go tool cover -html $(COVERFILE)
 
 dump:
-	go run ./cmd/export/ > api/dump.json
+	go run ./cmd/dump/ > api/dump.json
 
 test:
 	go test -coverprofile $(COVERFILE) -v ./...
