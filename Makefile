@@ -1,14 +1,7 @@
-BINARY := temagua-api
 COVERFILE := cover.out
 
-api:
-	go run .
-
-build: clean
-	go build -o $(BINARY) .
-
 clean:
-	rm -f $(BINARY) $(COVERFILE) sqlite.db
+	rm -f $(COVERFILE) sqlite.db
 
 coverage:
 	go tool cover -html $(COVERFILE)
