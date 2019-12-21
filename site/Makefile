@@ -1,13 +1,13 @@
-build: clean
-	export NODE_ENV=development
+ENV_FILE := .env
+
+build: clean env
 	npm run build
 
-build-prod: clean
-	export NODE_ENV=production
+build-prod: clean env-prod
 	npm run build
 
 clean:
-	rm -rf .cache/ dist/ workers-site/worker/
+	rm -rf .cache/ dist/ workers-site/worker/ $(ENV_FILE)
 
 deploy: build
 	npm run wrangler -- publish
@@ -18,8 +18,14 @@ deploy-prod: build-prod
 deps:
 	npm ci
 
+env:
+	echo 'API_URL="https://temagua-api.myhro.workers.dev"' > $(ENV_FILE)
+
+env-prod:
+	echo 'API_URL="https://temagua-api.myhro.info"' > $(ENV_FILE)
+
 serve:
 	npm run serve
 
-watch: clean
+watch: clean env
 	npm run watch

@@ -2,6 +2,7 @@
 dist/
 node_modules/
 site/workers-site/worker/
+.env
 cover.out
 dump.json
 sqlite.db
