@@ -6,7 +6,7 @@ clean:
 db:
 	npm run wrangler -- kv:bulk put --binding DB $(DUMP)
 
-db-prod: db
+db-prod:
 	npm run wrangler -- kv:bulk put --binding DB --env production $(DUMP)
 
 deploy:

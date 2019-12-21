@@ -51,7 +51,6 @@ func init() {
 	if err != nil {
 		log.Fatal("Database error: ", err)
 	}
-
 }
 
 func main() {
