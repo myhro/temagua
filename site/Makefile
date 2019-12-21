@@ -7,7 +7,7 @@ build-prod: clean
 	npm run build
 
 clean:
-	rm -rf .cache/ dist/
+	rm -rf .cache/ dist/ workers-site/worker/
 
 deploy: build
 	npm run wrangler -- publish

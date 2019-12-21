@@ -12,8 +12,14 @@ build-dump:
 build-restore:
 	go build -o $(RESTORE_CMD) $(RESTORE_FOLDER)
 
-clean:
+clean: clean-api clean-site
 	rm -f $(COVERFILE) $(DUMP_CMD) $(RESTORE_CMD) sqlite.db
+
+clean-api:
+	make -C api/ clean
+
+clean-site:
+	make -C site/ clean
 
 coverage:
 	go tool cover -html $(COVERFILE)
