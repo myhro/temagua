@@ -1,4 +1,4 @@
-export const neighborhoods = {
+const neighborhoods = {
   'Cidade Nova': 0,
   'Vila Guilhermina': 0,
   'Augusta Mota': 1,
@@ -155,6 +155,4 @@ export const neighborhoods = {
   'Distrito Industrial': 5,
 }
 
-export function sortNeighborhoods(a, b, inputString) {
-  return a.localeCompare(b);
-}
+export default neighborhoods;
