@@ -1,9 +1,11 @@
 {
   "devDependencies": {
-    "@cloudflare/wrangler": "^1.6.0"
+    "@cloudflare/wrangler": "^1.6.0",
+    "prettier": "^1.19.1"
   },
   "main": "index.js",
   "scripts": {
+    "prettier": "prettier",
     "wrangler": "wrangler"
   }
 }

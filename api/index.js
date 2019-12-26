@@ -1,14 +1,12 @@
 addEventListener('fetch', event => {
-  event.respondWith(handleRequest(event.request))
-})
+  event.respondWith(handleRequest(event.request));
+});
 
 async function handleRequest(request) {
   let url = new URL(request.url);
   let routes = {
-    'routes': [
-      '/interruption',
-    ]
-  }
+    routes: ['/interruption'],
+  };
 
   if (url.pathname.startsWith('/interruption')) {
     return getInterruption(url);
@@ -51,7 +49,7 @@ async function getInterruption(url) {
   let region = parseInt(params.get('region'));
 
   if (Number.isNaN(region) || region === null) {
-    return response({error: 'not a valid region'}, 400);
+    return response({ error: 'not a valid region' }, 400);
   }
 
   let outdated = await checkOutdated();
@@ -86,15 +84,15 @@ async function regionStatus(region) {
 
 function response(content, status) {
   let headers = new Headers({
-   'Access-Control-Allow-Origin': '*',
-   'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json',
   });
 
   if (status === undefined) {
     status = 200;
   }
 
-  let res = new Response(JSON.stringify(content), {headers: headers, status: status});
+  let res = new Response(JSON.stringify(content), { headers, status });
 
   return res;
 }

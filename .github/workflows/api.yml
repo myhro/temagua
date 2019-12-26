@@ -1,7 +1,20 @@
 name: API
 on: [push]
 jobs:
+  check:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Check
+        run: |
+          cd api/
+          make deps
+          make check
   deploy:
+    needs: check
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v1

@@ -1,4 +1,8 @@
 DUMP := dump.json
+PRETTIER_OPTS = --quote-props consistent --single-quote --trailing-comma es5
+
+check:
+	npm run prettier -- $(PRETTIER_OPTS) --check index.js
 
 clean:
 	rm -f $(DUMP)
@@ -17,6 +21,9 @@ deploy-prod:
 
 deps:
 	npm ci
+
+prettier:
+	npm run prettier -- $(PRETTIER_OPTS) --write index.js
 
 preview:
 	npm run wrangler -- preview --watch
