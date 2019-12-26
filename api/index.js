@@ -32,6 +32,7 @@ function checkInterval(interval) {
 }
 
 async function checkOutdated() {
+  // eslint-disable-next-line no-undef
   let res = await DB.get('last');
 
   if (res === null) {
@@ -78,6 +79,7 @@ async function regionStatus(region) {
   let now = new Date();
   let date = now.toISOString().split('T')[0];
   let query = `${date}:${region}`;
+  // eslint-disable-next-line no-undef
   let res = await DB.get(query);
   return res;
 }

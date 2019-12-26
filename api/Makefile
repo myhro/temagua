@@ -22,6 +22,9 @@ deploy-prod:
 deps:
 	npm ci
 
+lint:
+	npm run eslint
+
 prettier:
 	npm run prettier -- $(PRETTIER_OPTS) --write index.js
 

@@ -13,6 +13,7 @@ jobs:
           cd api/
           make deps
           make check
+          make lint
   deploy:
     needs: check
     runs-on: ubuntu-18.04
