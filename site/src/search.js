@@ -24,9 +24,7 @@ class Search extends React.Component {
   render() {
     return (
       <Row>
-        <h5 className="col s12 light">
-          Digite seu bairro:
-        </h5>
+        <h5 className="col s12 light">Digite seu bairro:</h5>
         <div className="input-field col l4 offset-l4 s8 offset-s2">
           <input
             type="text"

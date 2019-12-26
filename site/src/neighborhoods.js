@@ -153,6 +153,6 @@ const neighborhoods = {
   'Vila Telma': 4,
   'Vila Tiradentes': 4,
   'Distrito Industrial': 5,
-}
+};
 
 export default neighborhoods;

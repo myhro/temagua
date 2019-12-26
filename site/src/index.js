@@ -54,7 +54,7 @@ class App extends React.Component {
         size = 'small';
     }
 
-    this.setState({color, message, size});
+    this.setState({ color, message, size });
   }
 
   handleChange(event) {
@@ -98,7 +98,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById('root'));

@@ -1,10 +1,14 @@
 ENV_FILE := .env
+PRETTIER_OPTS = --quote-props consistent --single-quote --trailing-comma es5
 
 build: clean env
 	npm run build
 
 build-prod: clean env-prod
 	npm run build
+
+check:
+	npm run prettier -- $(PRETTIER_OPTS) --check "src/*.js"
 
 clean:
 	rm -rf .cache/ dist/ workers-site/worker/ $(ENV_FILE)
@@ -23,6 +27,9 @@ env:
 
 env-prod:
 	echo 'API_URL="https://temagua-api.myhro.info"' > $(ENV_FILE)
+
+prettier:
+	npm run prettier -- $(PRETTIER_OPTS) --write "src/*.js"
 
 serve:
 	npm run serve
