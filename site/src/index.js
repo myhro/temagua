@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import { hasWater, waterStatus } from './backend';
 import Header from './header';
 import neighborhoods from './neighborhoods';
-import Row from './row';
 import Search from './search';
 import Status from './status';
 
@@ -63,7 +62,7 @@ class App extends React.Component {
     });
   }
 
-  handleFocus(event) {
+  handleFocus() {
     this.setState({
       message: '',
       query: '',

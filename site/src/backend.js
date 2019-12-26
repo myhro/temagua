@@ -8,6 +8,7 @@ export const waterStatus = {
 export async function hasWater(region) {
   let res;
   try {
+    // eslint-disable-next-line no-undef
     res = await fetch(process.env.API_URL + '/interruption?region=' + region);
   } catch (e) {
     return waterStatus.ERROR;

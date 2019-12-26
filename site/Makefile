@@ -28,6 +28,9 @@ env:
 env-prod:
 	echo 'API_URL="https://temagua-api.myhro.info"' > $(ENV_FILE)
 
+lint:
+	npm run eslint
+
 prettier:
 	npm run prettier -- $(PRETTIER_OPTS) --write "src/*.js"
 

@@ -87,7 +87,6 @@ const neighborhoods = {
   'Jardim Olímpico': 3,
   'Jardim São Luiz': 3,
   'Lurdes': 3,
-  'Mangues': 3,
   'Morada do Sol': 3,
   'Nossa Senhora de Fátima': 3,
   'Novo Delfino': 3,
