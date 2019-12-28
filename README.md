@@ -6,7 +6,7 @@ What this project does is to process the [restriction schedule][2] for the city 
 
 # Components
 
-- Parsers in the `parse-html.sh` script and the `interruption` package.
+- Parsers in the `parser/` folder and the `interruption` package.
 - Database dump/restore tools in the `cmd/` folder.
 - API in the `api/` folder.
 - Web app in the `site/` folder.
