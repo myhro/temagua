@@ -1,0 +1,10 @@
+|Dia|Regiões Desabastecidas|Desabastecimento|Período de Interrupção|
+|Data|Início|Fim|
+|SEGUNDA|01, 02|30/12/2019|A partir de 0h|Até às 24h|24 horas|
+|TERÇA|*|31/12/2019|*Devido às comemorações fim de ano, não haverá racionamento nos dias 31/12/2019 e 01/01/2020.|
+|QUARTA|*|01/01/2020|
+|QUINTA|03, 04|02/01/2020|A partir de 0h|Até às 24h|24 horas|
+|SEXTA|01, 02|03/01/2020|A partir de 0h|Até às 24h|24 horas|
+|SÁBADO|03, 04|04/01/2020|A partir de 0h|Até às 24h|24 horas|
+|DOMINGO|01, 02|05/01/2020|A partir de 0h|Até às 24h|24 horas|
+|TODOS|05|Todos os dias a partir de 22h até 04h do dia posterior, exceto dias 31/12/2019 e 01/01/2020.|06 horas|

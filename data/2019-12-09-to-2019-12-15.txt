@@ -1,8 +1,10 @@
-   SEGUNDA     03, 04     09/12/2019 partir às   24 horas                     
-    TERÇA      01, 02     10/12/2019 partir às   24 horas                     
-   QUARTA      03, 04     11/12/2019 partir às   24 horas                     
-   QUINTA      01, 02     12/12/2019 partir às   24 horas                     
-    SEXTA      03, 04     13/12/2019 partir às   24 horas                     
-   SÁBADO      01, 02     14/12/2019 partir às   24 horas                     
-   DOMINGO     03, 04     15/12/2019 partir às   24 horas                     
-    TODOS        05       partir de 22h até 04h  06 horas                     
+|Dia|Regiões Desabastecidas|Desabastecimento|Período de Interrupção|
+|Data|Início|Fim|
+|SEGUNDA|03, 04|09/12/2019|A partir de 0h|Até às 24h|24 horas|
+|TERÇA|01, 02|10/12/2019|A partir de 0h|Até às 24h|24 horas|
+|QUARTA|03, 04|11/12/2019|A partir de 0h|Até às 24h|24 horas|
+|QUINTA|01, 02|12/12/2019|A partir de 0h|Até às 24h|24 horas|
+|SEXTA|03, 04|13/12/2019|A partir de 0h|Até às 24h|24 horas|
+|SÁBADO|01, 02|14/12/2019|A partir de 0h|Até às 24h|24 horas|
+|DOMINGO|03, 04|15/12/2019|A partir de 0h|até às 24h|24 horas|
+|TODOS|05|Todos os dias a partir de 22h até 04h do dia posterior|06 horas|
