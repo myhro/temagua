@@ -12,7 +12,8 @@ import (
 	"github.com/myhro/temagua/interruption"
 )
 
-const timeFormat = "2006-01-02 15:04:05"
+const dateFormat = "2006-01-02"
+const dateTimeFormat = "2006-01-02 15:04:05"
 
 var db *sql.DB
 
@@ -50,11 +51,20 @@ func getInterruptions() []KV {
 	intset := fetchDB()
 
 	for _, inter := range intset {
+		duration := fmt.Sprintf("%v|%v", inter.Start.Format(dateTimeFormat), inter.End.Format(dateTimeFormat))
 		entry := KV{
-			Key:   fmt.Sprintf("%v:%v", inter.Start.Format("2006-01-02"), inter.Region),
-			Value: fmt.Sprintf("%v|%v", inter.Start.Format(timeFormat), inter.End.Format(timeFormat)),
+			Key:   fmt.Sprintf("%v:%v", inter.Start.Format(dateFormat), inter.Region),
+			Value: duration,
 		}
 		kvs = append(kvs, entry)
+
+		if inter.Start.Day() != inter.End.Day() {
+			entry = KV{
+				Key:   fmt.Sprintf("%v:%v", inter.End.Format(dateFormat), inter.Region),
+				Value: duration,
+			}
+			kvs = append(kvs, entry)
+		}
 	}
 
 	return kvs
@@ -83,7 +93,7 @@ func getLastInterruption() KV {
 }
 
 func parseTime(dt string) time.Time {
-	t, err := time.Parse(timeFormat, dt)
+	t, err := time.Parse(dateTimeFormat, dt)
 	if err != nil {
 		log.Fatal("Couldn't parse time: ", err)
 	}
