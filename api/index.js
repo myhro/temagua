@@ -16,17 +16,11 @@ async function handleRequest(request) {
 }
 
 function checkInterval(interval) {
-  let hours = interval.split('-');
-  let h1 = hours[0];
-  let h2 = hours[1];
+  let [d1, d2] = interval.split('|');
 
   let now = new Date();
-  let year = now.getUTCFullYear();
-  let month = now.getUTCMonth();
-  let day = now.getUTCDate();
-
-  let start = new Date(Date.UTC(year, month, day, h1));
-  let end = new Date(Date.UTC(year, month, day, h2));
+  let start = new Date(d1);
+  let end = new Date(d2);
 
   return now >= start && now <= end;
 }
@@ -66,8 +60,6 @@ async function getInterruption(url) {
   let status = await regionStatus(region);
   if (status === null) {
     res['interrupted'] = false;
-  } else if (status == 'all-day') {
-    res['interrupted'] = true;
   } else {
     res['interrupted'] = checkInterval(status);
   }
@@ -94,7 +86,5 @@ function response(content, status) {
     status = 200;
   }
 
-  let res = new Response(JSON.stringify(content), { headers, status });
-
-  return res;
+  return new Response(JSON.stringify(content), { headers, status });
 }
