@@ -1,2 +1,4 @@
-   SEGUNDA     1 e 2      16/12/2019 partir às      24h                       
-    TODOS        5        partir de 22h até 04h     6h                        
+|Dia|Regiões Desabastecidas|Desabastecimento|Período de Interrupção|
+|Data|Início|Fim|
+|SEGUNDA|1 e 2|16/12/2019|A partir de 0h|Até às 24h|24h|
+|TODOS|5|Todos os dias a partir de 22h até 04h do dia posterior|6h|

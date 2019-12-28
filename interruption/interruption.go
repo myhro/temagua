@@ -16,15 +16,17 @@ type Interruption struct {
 }
 
 type Set struct {
-	Content string
-	List    []Interruption
-	Lines   [][]string
-	Source  string
+	Content         string
+	List            []Interruption
+	Lines           [][]string
+	NonInterruption map[string]bool
+	Source          string
 }
 
 func NewSet(s string) *Set {
 	set := Set{
-		Source: s,
+		NonInterruption: make(map[string]bool),
+		Source:          s,
 	}
 	set.load()
 	return &set
@@ -38,13 +40,11 @@ func (iset *Set) clean() {
 	iset.Content = strings.Trim(iset.Content, "\n")
 	for _, line := range strings.Split(iset.Content, "\n") {
 		cols := []string{}
-		for _, c := range strings.Fields(line) {
-			// Ignore useless separators
-			if c == "e" {
+		for _, c := range strings.Split(line, "|") {
+			c = strings.TrimSpace(c)
+			if len(c) == 0 {
 				continue
 			}
-			c = strings.Trim(c, ",")
-
 			cols = append(cols, c)
 		}
 		iset.Lines = append(iset.Lines, cols)
@@ -70,8 +70,12 @@ func (iset *Set) load() {
 
 func (iset *Set) parse() {
 	for i := range iset.Lines {
-		dates := iset.parseDates(i)
+		if iset.skipLine(i) {
+			continue
+		}
+
 		regions := iset.parseRegions(i)
+		dates := iset.parseDates(i)
 		for _, r := range regions {
 			for _, d := range dates {
 				tmp := Interruption{
@@ -125,9 +129,14 @@ func (iset *Set) parseAllDays(i int) []Interruption {
 			Start:  start,
 			End:    end,
 		}
-		list = append(list, tmp)
+		day := start.Format("02/01/2006")
 		start = start.Add(24 * time.Hour)
 		end = end.Add(24 * time.Hour)
+		// Current day is checked after advancing time to avoid an infinite loop
+		if iset.NonInterruption[day] {
+			continue
+		}
+		list = append(list, tmp)
 	}
 
 	return list
@@ -140,7 +149,7 @@ func (iset *Set) parseDates(i int) []Interruption {
 		return iset.parseAllDays(i)
 	}
 
-	start, err := time.Parse("02/01/2006", iset.Lines[i][3])
+	start, err := time.Parse("02/01/2006", iset.Lines[i][2])
 	if err != nil {
 		log.Print("Couldn't parse date: ", err)
 		return list
@@ -160,11 +169,14 @@ func (iset *Set) parseDates(i int) []Interruption {
 }
 
 func (iset *Set) parseDuration(i int) time.Duration {
-	last := len(iset.Lines[i]) - 1
-	dur := iset.Lines[i][last-1]
-	if iset.Lines[i][last] != "horas" {
-		dur = iset.Lines[i][last]
-		dur = strings.Trim(dur, "h")
+	size := len(iset.Lines[i])
+	last := iset.Lines[i][size-1]
+
+	var dur string
+	if strings.HasSuffix(last, "horas") {
+		dur = strings.Split(last, " ")[0]
+	} else {
+		dur = strings.Trim(last, "h")
 	}
 
 	hours, err := strconv.Atoi(dur)
@@ -176,17 +188,20 @@ func (iset *Set) parseDuration(i int) time.Duration {
 }
 
 func (iset *Set) parseRegions(i int) []int {
-	pos := []int{
-		1,
+	col := iset.Lines[i][1]
+	regList := []string{}
+	if strings.Contains(col, ",") {
+		regList = strings.Split(col, ",")
+	} else if strings.Contains(col, "e") {
+		regList = strings.Split(col, "e")
+	} else {
+		regList = append(regList, col)
 	}
+
 	regions := []int{}
-
-	if iset.Lines[i][0] != "TODOS" {
-		pos = append(pos, 2)
-	}
-
-	for _, p := range pos {
-		r, err := strconv.Atoi(iset.Lines[i][p])
+	for _, e := range regList {
+		e = strings.TrimSpace(e)
+		r, err := strconv.Atoi(e)
 		if err != nil {
 			log.Print("Couldn't parse region: ", err)
 			continue
@@ -198,12 +213,26 @@ func (iset *Set) parseRegions(i int) []int {
 }
 
 func (iset *Set) parseStartingHour(i int) (int, error) {
-	hour := iset.Lines[i][4]
-	if !strings.HasSuffix(hour, "h") {
-		hour = iset.Lines[i][3]
+	var hour string
+	for _, w := range strings.Split(iset.Lines[i][2], " ") {
+		if strings.HasSuffix(w, "h") {
+			hour = strings.Trim(w, "h")
+			break
+		}
 	}
-	hour = strings.Trim(hour, "h")
 	return strconv.Atoi(hour)
+}
+
+func (iset *Set) skipLine(i int) bool {
+	first := iset.Lines[i][0]
+	if first == "Dia" || first == "Data" {
+		return true
+	} else if iset.Lines[i][1] == "*" {
+		date := iset.Lines[i][2]
+		iset.NonInterruption[date] = true
+		return true
+	}
+	return false
 }
 
 func fixTimeZone(t time.Time) time.Time {
