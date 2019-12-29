@@ -10,7 +10,8 @@ function numericKeys(o) {
   return Object.keys(o).filter(k => !isNaN(k));
 }
 
-function parseRow($, cols) {
+function parseRow($, row) {
+  const cols = $(row).find('td');
   let text = '|';
   for (const i of numericKeys(cols)) {
     text +=
@@ -38,8 +39,7 @@ async function main() {
   const table = $('table')['2'];
   const rows = $(table).find('tr');
   for (const i of numericKeys(rows)) {
-    const cols = $(rows[i]).find('td');
-    console.log(parseRow($, cols));
+    console.log(parseRow($, rows[i]));
   }
 }
 
