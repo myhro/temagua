@@ -1,3 +1,5 @@
+/* global M */
+
 import React from 'react';
 
 import neighborhoods from './neighborhoods';
@@ -18,7 +20,6 @@ class Search extends React.Component {
       sortFunction: (a, b) => a.localeCompare(b),
     };
 
-    // eslint-disable-next-line no-undef
     M.Autocomplete.init(elems, options);
   }
 
