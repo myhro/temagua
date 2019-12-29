@@ -3,7 +3,8 @@ kv-namespaces = [
   { binding = "DB", id = "6279e78b38424e549b5fbd4754831915" }
 ]
 name = "temagua-api"
-type = "javascript"
+type = "webpack"
+webpack_config = "webpack.production.js"
 workers_dev = true
 
 [env.production]
@@ -11,5 +12,6 @@ kv-namespaces = [
   { binding = "DB", id = "088c359c269a432cad3d815c326fc977" }
 ]
 route = "temagua-api.myhro.info/*"
+webpack_config = "webpack.production.js"
 workers_dev = false
 zone_id = "dbe71f84a9e980bcfd36c2f2fda5e825"
