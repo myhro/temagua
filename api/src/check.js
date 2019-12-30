@@ -7,8 +7,8 @@ export async function checkInterruption(region, datetime) {
     datetime = new Date();
   }
 
-  let status = await checkRegion(region, datetime);
-  return checkInterval(status, datetime);
+  let interval = await checkRegion(region, datetime);
+  return checkInterval(interval, datetime);
 }
 
 function checkInterval(interval, datetime) {
