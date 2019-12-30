@@ -1,9 +1,9 @@
-/* global DB,global,it */
+/* global DB, global, it */
 
 import assert from 'assert';
 
 import Database from './database';
-import { checkInterval, regionStatus } from '../src/check';
+import { checkInterruption } from '../src/check';
 
 global.DB = new Database();
 DB.load();
@@ -21,9 +21,8 @@ it('checks for a whole day of interruptions', async function() {
     { date: '2019-11-18 23:59:59-03:00', region: 1 },
   ];
   for (let t of tests) {
-    let status = await regionStatus(t.region, t.date);
-    let res = checkInterval(status, t.date);
-    assert.equal(res, true);
+    let interrupted = await checkInterruption(t.region, t.date);
+    assert.equal(interrupted, true);
   }
 });
 
@@ -40,20 +39,26 @@ it('checks for a whole day of availability', async function() {
     { date: '2019-11-19 23:59:59-03:00', region: 1 },
   ];
   for (let t of tests) {
-    let status = await regionStatus(t.region, t.date);
-    let res = checkInterval(status, t.date);
-    assert.equal(res, false);
+    let interrupted = await checkInterruption(t.region, t.date);
+    assert.equal(interrupted, false);
   }
 });
 
 it('checks for availability on holidays', async function() {
   let tests = [
     { date: '2019-12-31 12:00:00-03:00', region: 1 },
+    { date: '2019-12-31 12:00:00-03:00', region: 2 },
+    { date: '2019-12-31 12:00:00-03:00', region: 3 },
+    { date: '2019-12-31 12:00:00-03:00', region: 4 },
+    { date: '2019-12-31 12:00:00-03:00', region: 5 },
     { date: '2020-01-01 12:00:00-03:00', region: 1 },
+    { date: '2020-01-01 12:00:00-03:00', region: 2 },
+    { date: '2020-01-01 12:00:00-03:00', region: 3 },
+    { date: '2020-01-01 12:00:00-03:00', region: 4 },
+    { date: '2020-01-01 12:00:00-03:00', region: 5 },
   ];
   for (let t of tests) {
-    let status = await regionStatus(t.region, t.date);
-    let res = checkInterval(status, t.date);
-    assert.equal(res, false);
+    let interrupted = await checkInterruption(t.region, t.date);
+    assert.equal(interrupted, false);
   }
 });

@@ -1,4 +1,4 @@
-import { checkInterval, checkOutdated, regionStatus } from './check';
+import { checkInterruption, checkOutdated } from './check';
 import response from './response';
 
 export async function getInterruption(url) {
@@ -17,8 +17,7 @@ export async function getInterruption(url) {
     return response(res, 409);
   }
 
-  let status = await regionStatus(region);
-  res['interrupted'] = checkInterval(status);
+  res['interrupted'] = await checkInterruption(region);
   res['region'] = region;
 
   return response(res);
