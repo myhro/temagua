@@ -13,7 +13,7 @@
     "eslint-plugin-react": "^7.17.0",
     "parcel-bundler": "^1.12.4",
     "prettier": "^1.19.1",
-    "serve": "^11.2.0"
+    "serve": "^11.3.0"
   },
   "scripts": {
     "build": "parcel build src/index.html",
