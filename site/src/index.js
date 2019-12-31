@@ -28,6 +28,7 @@ class App extends React.Component {
   async handleAutocomplete(value) {
     let color = '';
     let message = '';
+    let query = value;
     let size = 'big';
 
     this.loading();
@@ -53,7 +54,7 @@ class App extends React.Component {
         size = 'small';
     }
 
-    this.setState({ color, message, size });
+    this.setState({ color, message, query, size });
   }
 
   handleChange(event) {
