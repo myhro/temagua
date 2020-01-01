@@ -3,36 +3,46 @@ import ReactDOM from 'react-dom';
 
 import { hasWater, waterStatus } from './backend';
 import Header from './header';
-import neighborhoods from './neighborhoods';
+import Neighborhoods from './neighborhoods';
 import Search from './search';
 import Status from './status';
 
 import '../node_modules/materialize-css/dist/css/materialize.min.css';
-import '../node_modules/materialize-css/dist/js/materialize.min.js';
+
+import './css/style.css';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.neighborhoods = new Neighborhoods();
     this.state = {
+      autocomplete: [],
       color: '',
       message: '',
       query: '',
       size: '',
     };
 
-    this.handleAutocomplete = this.handleAutocomplete.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleFocus = this.handleFocus.bind(this);
   }
 
-  async handleAutocomplete(value) {
+  handleChange(event) {
+    let query = event.target.value;
+    let autocomplete = this.neighborhoods.filter(query);
+    this.setState({ autocomplete, query });
+  }
+
+  async handleClick(query) {
     let color = '';
     let message = '';
-    let query = value;
     let size = 'big';
 
+    this.setState({ autocomplete: [], query });
     this.loading();
-    let region = neighborhoods[value];
+
+    let region = this.neighborhoods.region(query);
     let status = await hasWater(region);
     switch (status) {
       case waterStatus.AVAILABLE:
@@ -54,17 +64,12 @@ class App extends React.Component {
         size = 'small';
     }
 
-    this.setState({ color, message, query, size });
-  }
-
-  handleChange(event) {
-    this.setState({
-      query: event.target.value,
-    });
+    this.setState({ color, message, size });
   }
 
   handleFocus() {
     this.setState({
+      autocomplete: [],
       message: '',
       query: '',
     });
@@ -83,9 +88,10 @@ class App extends React.Component {
       <div className="container section">
         <Header />
         <Search
+          items={this.state.autocomplete}
           query={this.state.query}
-          onAutocomplete={this.handleAutocomplete}
           onChange={this.handleChange}
+          onClick={this.handleClick}
           onFocus={this.handleFocus}
         />
         <Status

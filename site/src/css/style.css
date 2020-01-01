@@ -1,0 +1,20 @@
+.suggestion {
+  color: #26a69a;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 14px 16px;
+  text-align: left;
+}
+
+.suggestion:hover {
+  background-color: #e8e6e3;
+}
+
+.suggestion-list {
+  border-color: lightgray;
+  border-style: solid;
+  border-top: 0px;
+  border-width: 1px;
+  box-shadow: 1px 1px 5px lightgray;
+  margin-top: -8px;
+}

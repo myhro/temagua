@@ -5,7 +5,8 @@
   "dependencies": {
     "materialize-css": "^1.0.0",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "unidecode": "^0.1.8"
   },
   "devDependencies": {
     "@cloudflare/wrangler": "^1.6.0",

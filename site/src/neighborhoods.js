@@ -1,3 +1,27 @@
+import unidecode from 'unidecode';
+
+class Neighborhoods {
+  constructor() {
+    this.list = Object.keys(neighborhoods).map(n => ({
+      name: n,
+      asciiName: unidecode(n).toLowerCase(),
+    }));
+    this.list.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  filter(query, limit) {
+    if (limit === undefined) {
+      limit = 10;
+    }
+    query = unidecode(query).toLowerCase();
+    return this.list.filter(n => n.asciiName.includes(query)).slice(0, limit);
+  }
+
+  region(name) {
+    return neighborhoods[name];
+  }
+}
+
 const neighborhoods = {
   'Cidade Nova': 0,
   'Vila Guilhermina': 0,
@@ -154,4 +178,4 @@ const neighborhoods = {
   'Distrito Industrial': 5,
 };
 
-export default neighborhoods;
+export default Neighborhoods;
