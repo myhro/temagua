@@ -2,7 +2,7 @@ name: Feed
 on:
   push:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 * * * *'
 jobs:
   Deploy:
     runs-on: ubuntu-18.04

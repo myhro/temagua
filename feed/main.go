@@ -39,8 +39,9 @@ func main() {
 	}
 
 	feed := &feeds.Feed{
-		Title: "Copasa - Em Racionamento - Montes Claros",
-		Link:  &feeds.Link{Href: feedURL},
+		Title:   "Copasa - Em Racionamento - Montes Claros",
+		Link:    &feeds.Link{Href: feedURL},
+		Created: time.Now(),
 	}
 
 	doc.Find(".item").Each(func(i int, s *goquery.Selection) {
