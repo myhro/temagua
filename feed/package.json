@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "@cloudflare/wrangler": "^1.6.0",
+    "serve": "^11.3.0"
+  },
+  "scripts": {
+    "serve": "serve dist/",
+    "wrangler": "wrangler"
+  }
+}

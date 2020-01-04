@@ -1,7 +1,7 @@
 .cache/
 dist/
 node_modules/
-*/worker/script.js
+**/worker/script.js
 .env
 cover.out
 dump.json
