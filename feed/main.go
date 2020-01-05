@@ -45,7 +45,7 @@ func main() {
 	}
 
 	doc.Find(".item").Each(func(i int, s *goquery.Selection) {
-		if i > 9 {
+		if i >= 10 {
 			return
 		}
 

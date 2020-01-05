@@ -3,18 +3,15 @@ import unidecode from 'unidecode';
 
 class Autocomplete extends React.Component {
   renderList() {
-    let list = [];
     let query = unidecode(this.props.query).toLowerCase();
 
-    for (let i = 0; i < this.props.items.length; i++) {
-      let item = this.props.items[i];
-
+    let list = this.props.items.map((item, i) => {
       let match = item.asciiName.indexOf(query);
       let begin = item.name.slice(0, match);
       let highlight = item.name.slice(match, match + query.length);
       let end = item.name.slice(match + query.length);
 
-      let li = (
+      return (
         <li
           className="suggestion"
           key={i}
@@ -25,9 +22,7 @@ class Autocomplete extends React.Component {
           {end}
         </li>
       );
-
-      list.push(li);
-    }
+    });
 
     return list;
   }
