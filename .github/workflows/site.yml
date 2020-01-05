@@ -43,7 +43,7 @@ jobs:
           make deps
           make deploy
   deploy-prod:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
     needs: deploy
     runs-on: ubuntu-18.04
     steps:
