@@ -17,11 +17,10 @@
     "serve": "^11.3.0"
   },
   "scripts": {
-    "build": "parcel build src/index.html",
     "eslint": "eslint src/",
     "prettier": "prettier",
+    "parcel": "parcel",
     "serve": "serve dist/",
-    "watch": "parcel watch src/index.html",
     "wrangler": "wrangler"
   }
 }

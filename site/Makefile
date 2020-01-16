@@ -1,16 +1,14 @@
-ENV_FILE := .env
-
 build: clean env
-	npm run build
+	npm run parcel -- build src/index.html
 
 build-prod: clean env-prod
-	npm run build
+	npm run parcel -- build src/index.html
 
 check:
 	npm run prettier -- --check "src/*.js"
 
 clean:
-	rm -rf .cache/ dist/ workers-site/worker/ $(ENV_FILE)
+	rm -rf .cache/ dist/ workers-site/worker/ .env
 
 deploy: build
 	npm run wrangler -- publish
@@ -22,10 +20,10 @@ deps:
 	npm ci
 
 env:
-	echo 'API_URL="https://temagua-api.myhro.workers.dev"' > $(ENV_FILE)
+	echo 'API_URL="https://temagua-api.myhro.workers.dev"' > .env
 
 env-prod:
-	echo 'API_URL="https://temagua-api.myhro.info"' > $(ENV_FILE)
+	echo 'API_URL="https://temagua-api.myhro.info"' > .env
 
 lint:
 	npm run eslint
@@ -37,4 +35,4 @@ serve:
 	npm run serve
 
 watch: clean env
-	npm run watch
+	npm run parcel -- src/index.html
