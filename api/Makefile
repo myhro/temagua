@@ -1,6 +1,5 @@
 DUMP := dump.json
 PRETTIER_GLOB = src/*.js test/*.js
-PRETTIER_OPTS = --quote-props consistent --single-quote --trailing-comma es5
 
 .PHONY: test
 
@@ -8,7 +7,7 @@ build:
 	npm run webpack -- --config webpack.production.js
 
 check:
-	npm run prettier -- $(PRETTIER_OPTS) --check $(PRETTIER_GLOB)
+	npm run prettier -- --check $(PRETTIER_GLOB)
 
 clean:
 	rm -rf dist/ worker/ $(DUMP)
@@ -32,7 +31,7 @@ lint:
 	npm run eslint
 
 prettier:
-	npm run prettier -- $(PRETTIER_OPTS) --write $(PRETTIER_GLOB)
+	npm run prettier -- --write $(PRETTIER_GLOB)
 
 preview:
 	npm run wrangler -- preview --watch

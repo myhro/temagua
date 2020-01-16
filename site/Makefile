@@ -1,5 +1,4 @@
 ENV_FILE := .env
-PRETTIER_OPTS = --quote-props consistent --single-quote --trailing-comma es5
 
 build: clean env
 	npm run build
@@ -8,7 +7,7 @@ build-prod: clean env-prod
 	npm run build
 
 check:
-	npm run prettier -- $(PRETTIER_OPTS) --check "src/*.js"
+	npm run prettier -- --check "src/*.js"
 
 clean:
 	rm -rf .cache/ dist/ workers-site/worker/ $(ENV_FILE)
@@ -32,7 +31,7 @@ lint:
 	npm run eslint
 
 prettier:
-	npm run prettier -- $(PRETTIER_OPTS) --write "src/*.js"
+	npm run prettier -- --write "src/*.js"
 
 serve:
 	npm run serve
