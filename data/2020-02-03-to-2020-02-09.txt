@@ -1,0 +1,10 @@
+|Dia|Regiões Desabastecidas|Desabastecimento|Período de Interrupção|
+|Data|Início|Fim|
+|SEGUNDA|03, 04|03/02/2020|A partir de 0h|Até às 24h|24 horas|
+|TERÇA|01, 02|04/02/2020|A partir de 0h|Até às 24h|24 horas|
+|QUARTA|03, 04|05/02/2020|A partir de 0h|Até às 24h|24 horas|
+|QUINTA|01, 02|06/02/2020|A partir de 0h|Até às 24h|24 horas|
+|SEXTA|03, 04|07/02/2020|A partir de 0h|Até às 24h|24 horas|
+|SÁBADO|01, 02|08/02/2020|A partir de 0h|Até às 24h|24 horas|
+|DOMINGO|03, 04|09/02/2020|A partir de 0h|Até às 24h|24 horas|
+|TODOS|05|Todos os dias a partir de 22h até 04h do dia posterior.|06 horas|
