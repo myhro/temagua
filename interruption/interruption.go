@@ -217,6 +217,10 @@ func (iset *Set) parseStartingHour(i int) (int, error) {
 	for _, w := range strings.Split(iset.Lines[i][2], " ") {
 		if strings.HasSuffix(w, "h") {
 			hour = strings.Trim(w, "h")
+		} else if strings.Contains(w, ":") {
+			hour = strings.Split(w, ":")[0]
+		}
+		if hour != "" {
 			break
 		}
 	}

@@ -1,0 +1,4 @@
+|Dia|Regiões Desabastecidas|Desabastecimento|Período de Interrupção|
+|Data|Início|Fim|
+|SEGUNDA|03, 04|17/02/2020|A partir de 00:00|Até as 23:59|24h|
+|TODOS|05|Todos os dias a partir de 22:00 até 04:00 do dia posterior.|06 horas|

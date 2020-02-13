@@ -67,6 +67,26 @@ func TestParseDateFormatV3(t *testing.T) {
 	assert.Equal(t, 06, last.End.Day())
 }
 
+func TestParseDateFormatV4(t *testing.T) {
+	intset := NewSet("testdata/2020-02-17-to-2020-02-23.txt")
+
+	first := intset.List[0]
+	assert.Equal(t, 2020, first.Start.Year())
+	assert.Equal(t, time.February, first.Start.Month())
+	assert.Equal(t, 17, first.Start.Day())
+	assert.Equal(t, 2020, first.End.Year())
+	assert.Equal(t, time.February, first.End.Month())
+	assert.Equal(t, 18, first.End.Day())
+
+	last := intset.List[len(intset.List)-1]
+	assert.Equal(t, 2020, last.Start.Year())
+	assert.Equal(t, time.February, last.Start.Month())
+	assert.Equal(t, 23, last.Start.Day())
+	assert.Equal(t, 2020, last.End.Year())
+	assert.Equal(t, time.February, last.End.Month())
+	assert.Equal(t, 24, last.End.Day())
+}
+
 func TestParseHourFormatV1(t *testing.T) {
 	intset := NewSet("testdata/2019-12-09-to-2019-12-15.txt")
 
@@ -115,6 +135,22 @@ func TestParseHourFormatV3(t *testing.T) {
 	assert.Equal(t, 0, last.End.Minute())
 }
 
+func TestParseHourFormatV4(t *testing.T) {
+	intset := NewSet("testdata/2020-02-17-to-2020-02-23.txt")
+
+	first := intset.List[0]
+	assert.Equal(t, 0, first.Start.Hour())
+	assert.Equal(t, 0, first.Start.Minute())
+	assert.Equal(t, 0, first.End.Hour())
+	assert.Equal(t, 0, first.End.Minute())
+
+	last := intset.List[len(intset.List)-1]
+	assert.Equal(t, 22, last.Start.Hour())
+	assert.Equal(t, 0, last.Start.Minute())
+	assert.Equal(t, 4, last.End.Hour())
+	assert.Equal(t, 0, last.End.Minute())
+}
+
 func TestParseRegionFormatV1(t *testing.T) {
 	intset := NewSet("testdata/2019-12-09-to-2019-12-15.txt")
 
@@ -142,6 +178,16 @@ func TestParseRegionFormatV3(t *testing.T) {
 	assert.Equal(t, 2, intset.List[1].Region)
 	assert.Equal(t, 7, len(intset.List))
 	for i := 0; i < 5; i++ {
+		assert.Equal(t, 5, intset.List[i+2].Region)
+	}
+}
+
+func TestParseRegionFormatV4(t *testing.T) {
+	intset := NewSet("testdata/2020-02-17-to-2020-02-23.txt")
+
+	assert.Equal(t, 3, intset.List[0].Region)
+	assert.Equal(t, 4, intset.List[1].Region)
+	for i := 0; i < 7; i++ {
 		assert.Equal(t, 5, intset.List[i+2].Region)
 	}
 }
