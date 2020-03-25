@@ -20,7 +20,7 @@ deps:
 	npm ci
 
 env:
-	echo 'API_URL="https://temagua-api.myhro.workers.dev"' > .env
+	echo 'API_URL="https://temagua-api.myhro.net"' > .env
 
 env-prod:
 	echo 'API_URL="https://temagua-api.myhro.info"' > .env

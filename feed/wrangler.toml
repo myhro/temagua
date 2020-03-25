@@ -1,7 +1,9 @@
 account_id = "779f26d6062518fa03d78247becfd24c"
 name = "copasa"
+route = "copasa.myhro.net/*"
 type = "webpack"
-workers_dev = true
+workers_dev = false
+zone_id = "61d51546beb0253d7f4c005cb3bf7749"
 
 [site]
 bucket = "dist"
@@ -9,5 +11,4 @@ entry-point = "workers-site"
 
 [env.production]
 route = "copasa.myhro.info/*"
-workers_dev = false
 zone_id = "dbe71f84a9e980bcfd36c2f2fda5e825"
