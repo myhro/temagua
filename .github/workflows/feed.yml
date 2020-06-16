@@ -1,8 +1,8 @@
 name: Feed
 on:
   push:
-  schedule:
-    - cron: '0 * * * *'
+  # schedule:
+  #   - cron: '0 * * * *'
 jobs:
   Deploy:
     runs-on: ubuntu-18.04
