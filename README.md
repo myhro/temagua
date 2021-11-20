@@ -8,7 +8,7 @@ What this project does is to process the [restriction schedule][2] for the city 
 
 - Parsers in the `parser/` folder and the `interruption` package.
 - Database dump/restore tools in the `cmd/` folder.
-- Web app in the `site/` folder.
+- Web app in the `webapp/` folder.
 
 
 [1]: https://en.wikipedia.org/wiki/Minas_Gerais#Geography

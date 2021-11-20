@@ -1,4 +1,4 @@
-name: Site
+name: WebApp
 on: [push]
 jobs:
   check:
@@ -10,7 +10,7 @@ jobs:
           node-version: 16.x
       - name: Check
         run: |
-          cd site/
+          cd webapp/
           npm ci
           make check
           make lint
@@ -24,7 +24,7 @@ jobs:
           node-version: 16.x
       - name: Build
         run: |
-          cd site/
+          cd webapp/
           npm ci
           make build
   test:
@@ -42,6 +42,6 @@ jobs:
         run: |
           make restore
           make dump
-          cd site/
+          cd webapp/
           npm ci
           make test

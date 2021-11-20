@@ -12,17 +12,14 @@ build-dump:
 build-restore:
 	go build -o $(RESTORE_BINARY) $(RESTORE_FOLDER)
 
-clean: clean-site
+clean:
 	rm -f $(COVERFILE) $(DUMP_BINARY) $(RESTORE_BINARY) sqlite.db
-
-clean-site:
-	make -C site/ clean
 
 coverage:
 	go tool cover -html $(COVERFILE)
 
 dump:
-	go run $(DUMP_FOLDER) > site/dump.json
+	go run $(DUMP_FOLDER) > webapp/dump.json
 
 restore:
 	go run $(RESTORE_FOLDER)
