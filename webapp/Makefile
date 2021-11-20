@@ -1,9 +1,10 @@
-PRETTIER_GLOB = functions/**/*.js src/*.js test/*.js
+PARCEL_FILES := src/index.html src/404.html
+PRETTIER_GLOB := functions/**/*.js src/*.js test/*.js
 
 .PHONY: test
 
 build:
-	npx parcel build src/index.html
+	npx parcel build $(PARCEL_FILES)
 
 check:
 	npx prettier --check $(PRETTIER_GLOB)
@@ -32,4 +33,4 @@ test:
 	TZ=UTC npx mocha dist/main.js
 
 watch: clean
-	npx parcel src/index.html
+	npx parcel $(PARCEL_FILES)
