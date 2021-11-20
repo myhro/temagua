@@ -27,34 +27,3 @@ jobs:
           cd site/
           make deps
           make build
-  deploy:
-    needs: build
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-      - name: Deploy
-        env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-        run: |
-          cd site/
-          make deps
-          make deploy
-  deploy-prod:
-    if: github.ref == 'refs/heads/master'
-    needs: deploy
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-      - name: Deploy Production
-        env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-        run: |
-          cd site/
-          make deps
-          make deploy-prod

@@ -10,12 +10,6 @@ check:
 clean:
 	rm -rf .cache/ dist/ workers-site/worker/ .env
 
-deploy: build
-	npm run wrangler -- publish
-
-deploy-prod: build-prod
-	npm run wrangler -- publish --env production
-
 deps:
 	npm ci
 
