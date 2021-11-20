@@ -1,13 +1,11 @@
-/* global DB */
-
-export async function checkInterruption(region, datetime) {
+export async function checkInterruption(DB, region, datetime) {
   if (datetime !== undefined) {
     datetime = new Date(datetime);
   } else {
     datetime = new Date();
   }
 
-  let interval = await checkRegion(region, datetime);
+  let interval = await checkRegion(DB, region, datetime);
   return checkInterval(interval, datetime);
 }
 
@@ -23,7 +21,7 @@ function checkInterval(interval, datetime) {
   return datetime >= start && datetime <= end;
 }
 
-export async function checkOutdated() {
+export async function checkOutdated(DB) {
   let res = await DB.get('last');
   if (res === null) {
     return false;
@@ -35,7 +33,7 @@ export async function checkOutdated() {
   return now > last;
 }
 
-async function checkRegion(region, datetime) {
+async function checkRegion(DB, region, datetime) {
   let date = datetime.toISOString().split('T')[0];
   let query = `${date}:${region}`;
   let res = await DB.get(query);

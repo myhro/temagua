@@ -1,5 +1,3 @@
-/* global process */
-
 export const waterStatus = {
   AVAILABLE: 1,
   UNAVAILABLE: 2,
@@ -10,7 +8,7 @@ export const waterStatus = {
 export async function hasWater(region) {
   let res;
   try {
-    res = await fetch(process.env.API_URL + '/interruption?region=' + region);
+    res = await fetch('/api/interruption?region=' + region);
   } catch (e) {
     return waterStatus.ERROR;
   }

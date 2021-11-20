@@ -8,7 +8,6 @@ What this project does is to process the [restriction schedule][2] for the city 
 
 - Parsers in the `parser/` folder and the `interruption` package.
 - Database dump/restore tools in the `cmd/` folder.
-- API in the `api/` folder.
 - Web app in the `site/` folder.
 
 

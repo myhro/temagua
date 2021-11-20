@@ -3,7 +3,7 @@
 import assert from 'assert';
 
 import Database from './database';
-import { checkInterruption } from '../src/check';
+import { checkInterruption } from '../functions/api/interruption/check';
 
 global.DB = new Database();
 DB.load();
@@ -21,7 +21,7 @@ it('checks for a whole day of interruptions', async function() {
     { date: '2019-11-18 23:59:59-03:00', region: 1 },
   ];
   for (let t of tests) {
-    let interrupted = await checkInterruption(t.region, t.date);
+    let interrupted = await checkInterruption(DB, t.region, t.date);
     assert.equal(interrupted, true);
   }
 });
@@ -39,7 +39,7 @@ it('checks for a whole day of availability', async function() {
     { date: '2019-11-19 23:59:59-03:00', region: 1 },
   ];
   for (let t of tests) {
-    let interrupted = await checkInterruption(t.region, t.date);
+    let interrupted = await checkInterruption(DB, t.region, t.date);
     assert.equal(interrupted, false);
   }
 });
@@ -58,7 +58,7 @@ it('checks for availability on holidays', async function() {
     { date: '2020-01-01 12:00:00-03:00', region: 5 },
   ];
   for (let t of tests) {
-    let interrupted = await checkInterruption(t.region, t.date);
+    let interrupted = await checkInterruption(DB, t.region, t.date);
     assert.equal(interrupted, false);
   }
 });

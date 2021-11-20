@@ -1,0 +1,9 @@
+account_id = "779f26d6062518fa03d78247becfd24c"
+kv_namespaces = [
+  { binding = "DB", id = "f47c51b966994a7bbd209ffbc751cabb" }
+]
+
+[env.production]
+kv_namespaces = [
+  { binding = "DB", id = "9ca9c633305f43aca9b475d579af7b6d" }
+]

@@ -11,7 +11,7 @@ jobs:
       - name: Check
         run: |
           cd site/
-          make deps
+          npm ci
           make check
           make lint
   build:
@@ -25,5 +25,5 @@ jobs:
       - name: Build
         run: |
           cd site/
-          make deps
+          npm ci
           make build
